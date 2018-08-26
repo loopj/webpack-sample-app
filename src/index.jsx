@@ -1,5 +1,14 @@
 import bugsnag from 'bugsnag-js'
-window.bugsnagClient = bugsnag('b83218f185ed61be5ab3ec6706a0d8bb')
+window.bugsnagClient = bugsnag({
+    apiKey: 'b83218f185ed61be5ab3ec6706a0d8bb',
+    beforeSend: (report) => {
+        report.stacktrace = report.stacktrace.map(stackframe => {
+            stackframe.inProject = !/\/node_modules\//.test(stackframe.file)
+
+            return stackframe
+        })
+    },
+})
 
 import React from 'react';
 import ReactDOM from 'react-dom';
