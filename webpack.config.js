@@ -1,3 +1,5 @@
+const path = require('path')
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -20,7 +22,10 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            components: path.resolve(__dirname, 'src/components/'),
+        }
     },
     output: {
         filename: 'bundle.js'
